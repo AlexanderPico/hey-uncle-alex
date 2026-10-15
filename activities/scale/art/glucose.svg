@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 170">
+  <g data-element="C" fill="#8ee4d3">
+    <circle cx="32.5" cy="48" r="7"/>
+    <circle cx="51.5" cy="48" r="7"/>
+    <circle cx="32.5" cy="73" r="7"/>
+    <circle cx="51.5" cy="73" r="7"/>
+    <circle cx="32.5" cy="98" r="7"/>
+    <circle cx="51.5" cy="98" r="7"/>
+  </g>
+  <g data-element="H" fill="#f4e7c5">
+    <circle cx="101.0" cy="48" r="7"/>
+    <circle cx="120.0" cy="48" r="7"/>
+    <circle cx="139.0" cy="48" r="7"/>
+    <circle cx="101.0" cy="73" r="7"/>
+    <circle cx="120.0" cy="73" r="7"/>
+    <circle cx="139.0" cy="73" r="7"/>
+    <circle cx="101.0" cy="98" r="7"/>
+    <circle cx="120.0" cy="98" r="7"/>
+    <circle cx="139.0" cy="98" r="7"/>
+    <circle cx="101.0" cy="123" r="7"/>
+    <circle cx="120.0" cy="123" r="7"/>
+    <circle cx="139.0" cy="123" r="7"/>
+  </g>
+  <g data-element="O" fill="#f69a88">
+    <circle cx="188.5" cy="48" r="7"/>
+    <circle cx="207.5" cy="48" r="7"/>
+    <circle cx="188.5" cy="73" r="7"/>
+    <circle cx="207.5" cy="73" r="7"/>
+    <circle cx="188.5" cy="98" r="7"/>
+    <circle cx="207.5" cy="98" r="7"/>
+  </g>
+</svg>
