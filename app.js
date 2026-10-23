@@ -22,24 +22,7 @@
     return c;
   }
 
-  var list = (globalThis.HUA_PROJECTS || []).slice();
-
-  // Private Photos card. The photo page's address is never in this public code: opening the photo page
-  // once hands it back here (as #photos=...), and it is remembered in this browser only.
-  var OK = /^https:\/\/[a-z0-9.-]+\/[A-Za-z0-9_-]{20,}\/?$/;
-  try {
-    var m = /^#photos=(.+)$/.exec(location.hash);
-    if (m) {
-      var u = decodeURIComponent(m[1]);
-      if (OK.test(u)) localStorage.setItem("hua:photos", u);
-      history.replaceState(null, "", location.pathname + location.search);
-    }
-    var stored = localStorage.getItem("hua:photos");
-    if (stored && OK.test(stored)) {
-      list.push({ id: "photos", title: "Photos of Us", emoji: "📸", blurb: "Pictures of Uncle Alex and the niblings.",
-        tags: ["family"], status: "live", action: "Look", url: stored });
-    }
-  } catch (e) { /* storage blocked: the card just stays hidden */ }
+  var list = globalThis.HUA_PROJECTS || [];
   var root = document.getElementById("projects");
   // Live projects first, then coming-soon, keeping list order within each group.
   list.filter(function (p) { return p.status === "live"; })
