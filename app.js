@@ -16,7 +16,6 @@
     c.appendChild(el("h2", null, p.title));
     c.appendChild(el("p", "blurb", p.blurb));
     var meta = el("div", "meta");
-    if (p.ages) meta.appendChild(el("span", "pill ages", "Ages " + p.ages));
     (p.tags || []).forEach(function (t) { meta.appendChild(el("span", "pill", t)); });
     c.appendChild(meta);
     c.appendChild(el("span", "cta", live ? (p.action || "Play") + " →" : "Coming soon"));
