@@ -33,7 +33,7 @@ globalThis.HUA_PROJECTS = [
   },
   {
     id: "videos",
-    title: "Videos Uncle Alex Picked",
+    title: "Video Picks",
     emoji: "🎬",
     blurb: "Videos Uncle Alex thinks are worth watching, all in one place.",
     tags: ["watch"],
