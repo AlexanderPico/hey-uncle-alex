@@ -1,0 +1,90 @@
+// Section pages: a top-level card on the landing page (projects.js) opens one of these lists.
+// Item fields are the same as projects.js. Relative urls are from the site root.
+//   note   -> a highlighted line on the card (used for the home Wi-Fi sites)
+//   newTab -> open the link in a new tab (the home sites are plain http on the Pi, away from this page)
+globalThis.HUA_HUBS = {
+  "bird-nerd": {
+    title: "Bird Nerd",
+    emoji: "🐦",
+    lede: "For everyone who loves birds.",
+    items: [
+      {
+        id: "avian-visitors",
+        title: "Avian Visitors",
+        emoji: "🪶",
+        blurb: "A live collage of the birds visiting the backyard, with the sounds they make.",
+        tags: ["birds"],
+        status: "live",
+        action: "Open",
+        url: "http://birdnet.local/",
+        note: "📶 Works only when you are on our home Wi-Fi. Anywhere else the page will not open.",
+        newTab: true,
+      },
+      {
+        id: "ednas-bird-book",
+        title: "Edna's Bird Book",
+        emoji: "📖",
+        blurb: "Edna's sketchbook of bird drawings.",
+        tags: ["birds", "art"],
+        status: "live",
+        action: "Open",
+        url: "http://birdnet.local:8787/",
+        note: "📶 Works only when you are on our home Wi-Fi. Anywhere else the page will not open.",
+        newTab: true,
+      },
+      {
+        id: "birdwatch-game",
+        title: "Birdwatch Game",
+        emoji: "🔭",
+        blurb: "A cozy birdwatching game: look across the field, listen for birdsong, and zoom in to spot who is singing.",
+        tags: ["game"],
+        status: "soon",
+        url: "",
+      },
+    ],
+  },
+  guitar: {
+    title: "Guitar Hero",
+    emoji: "🎸",
+    lede: "For those who want to rock!",
+    items: [
+      {
+        id: "riff-quest",
+        title: "Riff Quest",
+        emoji: "🎸",
+        blurb: "Pick a famous guitar riff and watch the notes scroll by while it plays. Slow it down to learn it.",
+        tags: ["music", "guitar", "play"],
+        status: "live",
+        url: "activities/riff-quest/",
+      },
+      {
+        id: "tuner",
+        title: "Guitar Tuner",
+        emoji: "🎚️",
+        blurb: "Tune your guitar with your microphone, or tap a string to hear the note you are aiming for.",
+        tags: ["music", "guitar", "tool"],
+        status: "live",
+        action: "Tune up",
+        url: "activities/tuner/",
+      },
+      {
+        id: "best-guitar-performances",
+        title: "Best Guitar Performances",
+        emoji: "🤘",
+        blurb: "Great guitar performances, hand-picked by Uncle Alex.",
+        tags: ["watch"],
+        status: "soon",
+        url: "",
+      },
+      {
+        id: "guitar-tutorials",
+        title: "Guitar Tutorials",
+        emoji: "🧑‍🏫",
+        blurb: "Videos that teach you how to play, hand-picked by Uncle Alex.",
+        tags: ["watch", "learn"],
+        status: "soon",
+        url: "",
+      },
+    ],
+  },
+};

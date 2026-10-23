@@ -40,3 +40,7 @@ a.card:hover, a.card:focus-visible { transform: translate(-2px, -2px); box-shado
 a.card:focus-visible { outline: 3px solid #235ba8; outline-offset: 6px; }
 .soon .cta { color: var(--muted); }
 footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 10px 20px 40px; }
+
+.host-nav{padding:6px 14px;background:#fff8ec;font:600 14px/1.5 system-ui}.host-nav a{color:#235453;text-decoration:none}.host-nav a:focus-visible{outline:3px solid #235ba8;outline-offset:2px}
+.hub-hero{padding-top:28px}.hub-emoji{font-size:3.4rem}
+.wifi-note{margin:0;padding:8px 12px;background:#fff;border:2px solid var(--ink);border-radius:12px;font-weight:700;font-size:.95rem}
