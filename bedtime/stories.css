@@ -13,6 +13,9 @@ h1{font-size:2rem;margin:6px 0 4px;line-height:1.2}
 .story-card .t{display:block;font-weight:700;line-height:1.25}
 .story-card .d{display:block;color:#c9c2ad;font:.85rem system-ui,sans-serif;margin-top:2px}
 .badge{display:inline-block;padding:2px 8px;margin-left:6px;border-radius:999px;background:#ffd98a;color:#101a33;font:700 .75rem system-ui,sans-serif;vertical-align:middle}
+.story-card img{flex:none;width:72px;height:72px;border-radius:12px;object-fit:cover;background:#101a33}
+.hero{display:block;width:100%;height:auto;border-radius:18px;margin:0 0 18px;background:#17254a}
+.credit{margin:-10px 0 18px;color:#8f9bbd;font:.75rem system-ui,sans-serif;text-align:right}
 .empty{color:#c9c2ad;font:1rem/1.5 system-ui,sans-serif}
 .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}
 .bar button{padding:10px 16px;border-radius:12px;border:2px solid #34456f;background:#17254a;color:#f3e9d2;font:700 1rem system-ui,sans-serif;cursor:pointer}
