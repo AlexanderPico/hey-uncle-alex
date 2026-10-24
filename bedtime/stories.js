@@ -1,0 +1,81 @@
+globalThis.HUA_STORIES = [{"date":"2026-10-23","title":"The First Snowbird","theme":"bird","paras":[[["In a cozy house near a big green park in Denver, the sun was getting sleepy. The sky turned pink. The mountains in the west turned purple. The cottonwood trees in the park wore their gold leaves, and the air smelled like cold apples.",""]],[["The big sister had a plan. \"Tonight,\" she said, \"we will look for the first junco of the winter.\" A junco (JUN-koh) is a small gray bird with a white tummy. It comes down from the mountains when the weather turns cold. Some people call it a snowbird.",""]],[["The little sister's eyes grew round. \"A snowbird,\" she whispered. \"Is its tummy as white as a snowball?\" ",""],["pause","p"]],[["\"Just as white,\" said the big sister. \"Let's go and see.\"",""]],[["Uncle Alex was visiting, and he found two warm hats. Mom filled two cups with cocoa. Then the three of them stepped out onto the porch, where the evening was cool and still.",""]],[["The little sister bounced and bounced. Her boots went thump, thump, thump on the boards. A small gray shape flew up and away. \"Oh,\" said the little sister. \"I was too bouncy.\"",""]],[["\"That's all right,\" said Uncle Alex softly. \"Birds like quiet. We can try again.\"",""]],[["Hush, little wind, the day is done.","i"]],[["So they tiptoed to the garden gate. The big sister counted the gold leaves on the ground. Something went ",""],["chick-a-dee-dee-dee","i"],[" from the fence. It was a chickadee, round and black-capped, hopping from post to post. ",""],["pause","p"],[" It said its own name two times, and then it flew off to bed.",""]],[["\"That's not a junco,\" said the big sister. \"But it is a lovely bird.\"",""]],[["\"A very lovely bird,\" said the little sister.",""]],[["Hush, little wind, the day is done.","i"]],[["The little sister looked at the porch, and the boots, and the quiet hats. She had an idea. \"Maybe we don't need to go anywhere,\" she said. \"Maybe we just sit still, and let them come to us.\"",""]],[["So they sat on the top step, side by side, under one big blanket. Nobody bounced. Nobody tiptoed. They just breathed, slow and soft. In, and out. In, and out.",""]],[["The porch light glowed like a tiny moon. The wind slowed down. And then, one by one, three small gray birds hopped out from under the bush. Their backs were gray as rain clouds. Their tummies were white as snowballs.",""]],[["The little sister did not squeal. She only smiled, a very big smile in the dark. The big sister held her hand. Uncle Alex hummed three soft notes, hum, hum, hum, and the juncos tilted their heads to listen.",""]],[["Hush, little wind, the day is done.","i"]],[["After a while, the three juncos flew up to the cottonwood tree. They tucked their heads under their wings. The park grew dim, and still, and sleepy.",""]],[["The three of them carried the empty cups inside. Boots came off. Hats came off. Pajamas went on, warm from the radiator. The little sister climbed into bed, and the big sister tucked the blanket under her chin.",""]],[["Outside, the moon rose over the mountains, round and slow and silver. The cottonwood leaves whispered. The snowbirds slept.",""]],[["\"Hush, little wind,\" whispered the big sister, \"the day is done.\"",""]],[["The little sister's eyes were already closed. The house was quiet. The park was quiet. The whole sleepy city of Denver was quiet, from the mountains to the plains.",""]],[["And everyone, everywhere, slept.",""]]],"note":"Juncos spend the summer high in the mountains and come down to town when the weather turns cold."}];
+(function(){
+  "use strict";
+  var PINS_KEY="hua:bedtime:v1:pins", FS_KEY="hua:bedtime:v1:fontsize", MAXPINS=50;
+  var site=(globalThis.HUA_STORIES||[]).slice();
+  var root=document.getElementById("app");
+  function load(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v;}catch(e){return d;}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+  function pins(){var p=load(PINS_KEY,{});return p&&typeof p==="object"&&!Array.isArray(p)?p:{};}
+  function validStory(s){return s&&typeof s.date==="string"&&typeof s.title==="string"&&Array.isArray(s.paras);}
+  function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n;}
+  function setSize(v){v=Math.max(1,Math.min(2,v));document.documentElement.style.setProperty("--fs",String(v));save(FS_KEY,v);}
+  setSize(load(FS_KEY,1.25));
+  function prettyDate(d){var p=d.split("-");var dt=new Date(Number(p[0]),Number(p[1])-1,Number(p[2]));return isNaN(dt)?d:dt.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});}
+  function findStory(date){
+    for(var i=0;i<site.length;i++)if(site[i].date===date)return site[i];
+    var p=pins()[date];return validStory(p)?p:null;
+  }
+  function card(s,newest,kept){
+    var b=el("button","story-card");b.type="button";
+    var m=el("span","");m.appendChild(el("span","t",s.title));
+    if(newest){m.firstChild.appendChild(el("span","badge","Tonight"));}
+    var d=el("span","d",prettyDate(s.date)+(kept?"  ·  kept":""));m.appendChild(d);
+    b.appendChild(el("span","moon",kept?"📌":"🌙")).style.fontSize="1.6rem";b.appendChild(m);
+    b.onclick=function(){location.hash="#/"+s.date;};return b;
+  }
+  function list(){
+    root.textContent="";
+    var w=el("div","wrap");
+    var a=el("a","back","← Hey Uncle Alex");a.href="../";w.appendChild(a);
+    w.appendChild(el("div","moon","🌙"));w.appendChild(el("h1","","Bedtime Stories"));
+    w.appendChild(el("p","sub","A new story every day. The last five stay here. Tap 📌 on a story to keep it."));
+    var ul=el("ul","list");
+    var keptMap=pins(),keptDates=Object.keys(keptMap).filter(function(k){return validStory(keptMap[k]);}).sort().reverse();
+    var siteDates=site.map(function(s){return s.date;});
+    var onlyKept=keptDates.filter(function(k){return siteDates.indexOf(k)<0;});
+    if(!site.length)ul.appendChild(el("li","empty","No stories yet. Check back tonight."));
+    site.forEach(function(s,i){var li=el("li");li.appendChild(card(s,i===0,!!keptMap[s.date]));ul.appendChild(li);});
+    if(onlyKept.length){var h=el("li");h.appendChild(el("h2","","📌 Kept stories"));ul.appendChild(h);
+      onlyKept.forEach(function(k){var li=el("li");li.appendChild(card(keptMap[k],false,true));ul.appendChild(li);});}
+    w.appendChild(ul);
+    w.appendChild(el("p","fine","Kept stories are saved on this device only."));
+    root.appendChild(w);document.title="Bedtime Stories · Hey Uncle Alex";
+  }
+  function paragraph(segs){
+    var p=el("p");
+    segs.forEach(function(g){
+      if(!Array.isArray(g)||typeof g[0]!=="string")return;
+      if(g[1]==="i"){p.appendChild(el("em","",g[0]));}
+      else if(g[1]==="p"){p.appendChild(el("span","pause","pause"));}
+      else p.appendChild(document.createTextNode(g[0]));
+    });
+    return p;
+  }
+  function story(date){
+    var s=findStory(date);
+    if(!s){location.hash="";return;}
+    root.textContent="";
+    var w=el("div","wrap");
+    var back=el("button","back","← All stories");back.type="button";back.onclick=function(){location.hash="";};w.appendChild(back);
+    var bar=el("div","bar");
+    var pin=el("button","","");pin.type="button";
+    function drawPin(){var on=!!pins()[date];pin.setAttribute("aria-pressed",on?"true":"false");pin.textContent=on?"📌 Kept":"📌 Keep this story";}
+    pin.onclick=function(){var p=pins(),on=!!p[date];
+      if(on){delete p[date];}else{if(Object.keys(p).length>=MAXPINS){alert("You have kept a lot of stories. Un-keep one first.");return;}p[date]=s;}
+      if(!save(PINS_KEY,p))alert("This device would not save the story.");drawPin();};
+    drawPin();bar.appendChild(pin);
+    var sm=el("button","","A−");sm.type="button";sm.setAttribute("aria-label","Smaller text");sm.onclick=function(){setSize(load(FS_KEY,1.25)-0.15);};
+    var lg=el("button","","A+");lg.type="button";lg.setAttribute("aria-label","Bigger text");lg.onclick=function(){setSize(load(FS_KEY,1.25)+0.15);};
+    bar.appendChild(sm);bar.appendChild(lg);w.appendChild(bar);
+    var art=el("article");art.appendChild(el("h1","",s.title));
+    s.paras.forEach(function(segs){if(Array.isArray(segs))art.appendChild(paragraph(segs));});
+    art.appendChild(el("p","end","The End"));
+    if(s.note)art.appendChild(el("p","note","🐦 Bird note: "+s.note));
+    w.appendChild(art);
+    var done=el("button","back","← All stories");done.type="button";done.onclick=function(){location.hash="";};w.appendChild(done);
+    root.appendChild(w);document.title=s.title+" · Bedtime Stories";window.scrollTo(0,0);
+  }
+  function route(){var m=/^#\/(\d{4}-\d{2}-\d{2})$/.exec(location.hash);if(m)story(m[1]);else list();}
+  window.addEventListener("hashchange",route);route();
+})();

@@ -33,6 +33,16 @@ globalThis.HUA_PROJECTS = [
     url: "guitar/",
   },
   {
+    id: "bedtime",
+    title: "Bedtime Stories",
+    emoji: "🌙",
+    blurb: "A new bedtime story every day. Read it together, and keep your favorites.",
+    tags: ["stories", "read together"],
+    status: "live",
+    action: "Read",
+    url: "bedtime/",
+  },
+  {
     id: "bird-nerd",
     title: "Bird Nerd",
     emoji: "🐦",

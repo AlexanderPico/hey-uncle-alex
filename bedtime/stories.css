@@ -1,0 +1,27 @@
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#101a33;color:#f3e9d2;font:calc(var(--fs,1.25)*1rem)/1.7 Georgia,'Iowan Old Style','Times New Roman',serif}
+.wrap{max-width:40rem;margin:0 auto;padding:12px 18px 60px}
+a.back,button.back{display:inline-block;padding:12px 4px;color:#ffd98a;font:700 1rem system-ui,sans-serif;text-decoration:none;background:none;border:0;cursor:pointer}
+h1{font-size:2rem;margin:6px 0 4px;line-height:1.2}
+.sub{margin:0 0 18px;color:#c9c2ad;font:1rem/1.5 system-ui,sans-serif}
+.moon{font-size:2.6rem}
+.list{display:grid;gap:12px;padding:0;margin:0 0 22px;list-style:none}
+.list h2{font:700 1rem system-ui,sans-serif;color:#ffd98a;margin:14px 0 4px;letter-spacing:.02em}
+.story-card{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:16px;border-radius:16px;border:2px solid #34456f;background:#17254a;color:inherit;font:inherit;cursor:pointer}
+.story-card:hover,.story-card:focus-visible{border-color:#ffd98a;outline:none}
+.story-card .t{display:block;font-weight:700;line-height:1.25}
+.story-card .d{display:block;color:#c9c2ad;font:.85rem system-ui,sans-serif;margin-top:2px}
+.badge{display:inline-block;padding:2px 8px;margin-left:6px;border-radius:999px;background:#ffd98a;color:#101a33;font:700 .75rem system-ui,sans-serif;vertical-align:middle}
+.empty{color:#c9c2ad;font:1rem/1.5 system-ui,sans-serif}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}
+.bar button{padding:10px 16px;border-radius:12px;border:2px solid #34456f;background:#17254a;color:#f3e9d2;font:700 1rem system-ui,sans-serif;cursor:pointer}
+.bar button[aria-pressed="true"]{background:#ffd98a;color:#101a33;border-color:#ffd98a}
+.bar button:focus-visible{outline:3px solid #ffd98a;outline-offset:2px}
+article h1{margin-bottom:14px}
+article p{margin:0 0 1.1em}
+article p em{color:#ffd98a;font-style:italic}
+.pause{display:inline-block;margin:0 .2em;padding:0 .6em;border-radius:999px;border:1px dashed #8f9bbd;color:#c9c2ad;font:.8rem system-ui,sans-serif;vertical-align:middle}
+.end{text-align:center;margin:1.6em 0 .4em;font-style:italic;color:#c9c2ad}
+.note{margin-top:1.4em;padding:12px 14px;border-radius:12px;background:#17254a;border:1px solid #34456f;font:.95rem/1.5 system-ui,sans-serif;color:#d8d1bc}
+.fine{margin-top:26px;color:#8f9bbd;font:.85rem/1.5 system-ui,sans-serif}
