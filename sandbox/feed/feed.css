@@ -1,0 +1,20 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#0f1b33;color:#fff;font-family:system-ui,-apple-system,sans-serif;overscroll-behavior:none}
+body{position:fixed;inset:0;width:100%}
+.app{height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px}
+.exit{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:5;width:60px;height:60px;border-radius:50%;border:0;background:#ffd98a;color:#0f1b33;font:700 28px/60px system-ui;text-align:center;text-decoration:none;box-shadow:0 3px 10px #0006}
+.exit:focus-visible,.btn:focus-visible,.start:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.screen{position:relative;width:min(100vw - 24px,(100dvh - 210px)*16/9);aspect-ratio:16/9;background:#000;border-radius:18px;overflow:hidden}
+.screen iframe,.screen #yt{position:absolute;inset:0;width:100%;height:100%;border:0}
+.shield{position:absolute;inset:0;z-index:2;touch-action:none;cursor:pointer}
+.shield.off{pointer-events:none}
+.start{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:0;background:linear-gradient(#27407a,#14224a);color:#fff;font:700 1.4rem system-ui;cursor:pointer}
+.start .big{font-size:5rem;line-height:1}
+.start[hidden]{display:none}
+.controls{display:flex;gap:18px;align-items:center}
+.btn{width:76px;height:76px;border-radius:50%;border:0;background:#ffd98a;color:#0f1b33;font-size:34px;cursor:pointer;box-shadow:0 3px 10px #0006}
+.btn.main{width:96px;height:96px;font-size:44px}
+.hint{margin:0;color:#c9d3ee;font-size:1rem;text-align:center;min-height:1.4em}
+.msg{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;background:#14224aee;font-size:1.2rem}
+.msg[hidden]{display:none}
+.title{margin:0;max-width:min(100vw - 24px,700px);color:#8f9bbd;font-size:.8rem;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

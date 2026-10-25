@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Laurel&#39;s Video Feed · Hey Uncle Alex</title>
+<meta name="theme-color" content="#0f1b33">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="feed.css"></head>
+<body>
+<a class="exit" href="../" aria-label="Back: Laurel&#39;s Sandbox">✕</a>
+<main class="app">
+  <div class="screen">
+    <div id="yt"></div>
+    <div id="shield" class="shield off" aria-label="Swipe up for the next video, tap to pause"></div>
+    <button id="start" class="start" type="button"><span class="big" aria-hidden="true">▶</span><span class="label">Tap to play</span></button>
+    <div id="msg" class="msg" role="status" hidden></div>
+  </div>
+  <div class="controls">
+    <button id="prev" class="btn" type="button" aria-label="Previous video">⏮</button>
+    <button id="play" class="btn main" type="button" aria-label="Play">▶</button>
+    <button id="next" class="btn" type="button" aria-label="Next video">⏭</button>
+  </div>
+  <p id="hint" class="hint">Swipe up for the next video</p>
+  <p id="title" class="title"></p>
+</main>
+<noscript><p>Turn on JavaScript to watch.</p></noscript>
+<script src="feed.js"></script>
+</body></html>

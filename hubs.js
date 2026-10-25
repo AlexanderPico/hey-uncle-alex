@@ -100,8 +100,9 @@ globalThis.HUA_HUBS = {
         emoji: "🎞️",
         blurb: "Videos that play one after another. Swipe to see the next one, tap to pause.",
         tags: ["watch"],
-        status: "soon",
-        url: "",
+        status: "live",
+        action: "Watch",
+        url: "sandbox/feed/",
       },
       {
         id: "super-baby-care",
