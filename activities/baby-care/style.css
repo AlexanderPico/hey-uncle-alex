@@ -1,0 +1,565 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #fff1e2;
+  color: #785247;
+  font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  touch-action: manipulation;
+}
+button:focus-visible {
+  outline: 4px solid #469f9e;
+  outline-offset: 3px;
+}
+button svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+[hidden] {
+  display: none !important;
+}
+#app {
+  max-width: 1100px;
+  min-width: 0;
+  margin: auto;
+  padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom);
+  height: 100svh;
+  min-height: 610px;
+  display: grid;
+  grid-template-rows: 65px 73px minmax(250px, 1fr) 144px 37px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 27px;
+  font-weight: 850;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+.brand-sun {
+  font-size: 38px;
+  color: #df9c56;
+}
+.brand small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 3.4px;
+  margin: 7px 0 0 3px;
+}
+.round {
+  background: #f9ddce;
+  border: 2px solid #fff8ec;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 25px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding-bottom: 9px;
+}
+nav button {
+  height: 62px;
+  max-width: 150px;
+  flex: 1;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: #ffe5d5;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 11px;
+  font-weight: 750;
+  box-shadow: 0 3px 0 #e9c7b4;
+}
+nav svg {
+  width: 34px;
+  height: 35px;
+}
+nav button[aria-pressed="true"] {
+  background: #fffaf0;
+  border-color: #8abfb2;
+  box-shadow: 0 3px 0 #9fbaab;
+}
+#scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 32px;
+  border: 4px solid #fffcf2;
+  background: #f5d6c3 url("./assets/room-kitchen.webp") center 58% /
+    cover;
+  box-shadow: 0 5px 0 #dfb9a2;
+}
+body[data-room="bath"] #scene {
+  background-image: url("./assets/room-bath.webp");
+  background-color: #c5e5df;
+}
+body[data-room="dress"] #scene,
+body[data-room="bed"] #scene {
+  background-image: url("./assets/room-bedroom.webp");
+  background-color: #f0d6ce;
+}
+.room-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#fff8dc08, #fff7e300 40%, #ffecc62b);
+}
+#caption {
+  position: absolute;
+  z-index: 3;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 93%;
+  white-space: nowrap;
+  background: #fffaf0ed;
+  padding: 10px 19px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 750;
+  box-shadow: 0 3px 0 #ba8f6c20;
+}
+#baby {
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 100%;
+  max-height: 94%;
+  height: 94%;
+  aspect-ratio: 1;
+  border: 0;
+  padding: 0;
+  background: none;
+  z-index: 2;
+  touch-action: none;
+}
+#sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 3px #7c584b24);
+}
+#baby > div {
+  position: absolute;
+  pointer-events: none;
+}
+#seat {
+  position: absolute;
+  width: 67%;
+  height: 16%;
+  left: 17%;
+  bottom: 5%;
+  background: #c2886d35;
+  filter: blur(8px);
+  border-radius: 50%;
+}
+#accessory {
+  left: 24%;
+  top: -2%;
+  width: 54%;
+  height: 28%;
+}
+#accessory[data-kind="bow"] {
+  left: 56%;
+  top: 5%;
+  width: 20%;
+  height: 20%;
+  transform: rotate(18deg);
+}
+#mess {
+  left: 42%;
+  top: 46%;
+  width: 18%;
+  height: 9%;
+  background:
+    radial-gradient(ellipse at 21% 21%, #d78048 0 14%, transparent 16%),
+    radial-gradient(ellipse at 80% 60%, #d78048 0 16%, transparent 18%),
+    radial-gradient(ellipse at 45% 73%, #e99c58 0 22%, transparent 25%);
+}
+#foam {
+  inset: 0;
+}
+.bubble {
+  position: absolute;
+  border: 2px solid #fffefd;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #fff 0 8%,
+    #e2fbff85 13%,
+    #b6e6e659 65%,
+    #fff8 90%
+  );
+  box-shadow: 0 2px 3px #539b9a33;
+  animation: float 2.5s ease-in-out infinite;
+}
+#blanket {
+  left: 19%;
+  top: 63%;
+  width: 65%;
+  height: 35%;
+  border-radius: 30% 30% 20% 20%;
+  background:
+    radial-gradient(circle at 18px 20px, #fff4bf 0 3px, transparent 4px) 0
+      0/39px 36px,
+    #aaaed4;
+  border: 4px solid #e1dafa;
+  box-shadow: 0 4px 0 #867fae;
+}
+#plush {
+  right: 0;
+  bottom: 2%;
+  width: 36%;
+  height: 43%;
+  transform: rotate(9deg);
+}
+#plush img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px #79584433);
+}
+#sleep {
+  right: 14%;
+  top: 11%;
+  font-size: 40px;
+  color: #fff8db;
+  text-shadow: 0 2px 3px #5f6c9c;
+  animation: float 3s infinite;
+}
+#sleep span {
+  font-size: 28px;
+  position: absolute;
+  left: 25px;
+  top: -25px;
+}
+#sleep small {
+  font-size: 19px;
+  position: absolute;
+  left: 45px;
+  top: -45px;
+}
+#baby.react {
+  animation: delight 0.65s ease-in-out;
+}
+#baby.wiggle {
+  animation: delight 0.65s ease-in-out;
+}
+#night {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #34456f;
+  opacity: 0;
+  transition: opacity 0.8s;
+  z-index: 4;
+}
+.dark #night {
+  opacity: 0.36;
+}
+.dark #caption {
+  background: #f8e9d8;
+}
+#tray {
+  min-width: 0;
+  z-index: 5;
+  position: relative;
+  align-self: stretch;
+  margin-top: 10px;
+  background: #fff9ed;
+  border-radius: 28px 28px 20px 20px;
+  border: 3px solid #fffdf7;
+  box-shadow: 0 5px 0 #e5c2ac;
+  padding: 7px 8px 10px;
+}
+#hint {
+  margin: 0 0 5px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: #9c7867;
+}
+#tools {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  height: 94px;
+}
+.tool {
+  width: 100%;
+  max-width: 118px;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 3px 4px;
+  background: #f8e8d6;
+  border: 2px solid #ecd6c0;
+  border-radius: 19px;
+  box-shadow: 0 3px 0 #dfbfa4;
+  font-size: 11px;
+  font-weight: 750;
+  touch-action: none;
+}
+.tool svg {
+  height: 62px;
+  width: 62px;
+  max-width: 100%;
+  pointer-events: none;
+}
+.tool span {
+  pointer-events: none;
+}
+.tool.selected {
+  border-color: #66a99f;
+  background: #d8eee3;
+  transform: translateY(-4px);
+  box-shadow: 0 5px 0 #9cc3b3;
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #a68370;
+  padding: 0 9px;
+}
+footer button {
+  background: none;
+  font-size: 10px;
+  min-height: 30px;
+  text-decoration: underline;
+}
+#drag-ghost {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%, -75%);
+  width: 92px;
+  height: 92px;
+  filter: drop-shadow(0 6px 4px #76544344);
+}
+#sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+#sparkles i {
+  position: absolute;
+  left: calc(18% + var(--i) * 10%);
+  top: 55%;
+  color: #fff0ab;
+  font-size: 27px;
+  font-style: normal;
+  text-shadow: 0 1px 1px #c68c44;
+  animation: spark 0.95s both;
+  animation-delay: calc(var(--i) * 0.035s);
+}
+#rain {
+  position: absolute;
+  inset: 15% 20% 15%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  background: repeating-linear-gradient(
+    110deg,
+    transparent 0 26px,
+    #d2f7ffb3 28px 31px,
+    transparent 34px 47px
+  );
+  clip-path: polygon(20% 0, 75% 0, 95% 100%, 0 100%);
+}
+#rain.raining {
+  animation: shower 0.85s;
+}
+@keyframes delight {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(0);
+  }
+  25% {
+    transform: translateX(-50%) rotate(-3deg) scale(1.035);
+  }
+  65% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes spark {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.3);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.1);
+  }
+}
+@keyframes shower {
+  20%,
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+}
+@media (min-width: 750px) {
+  #app {
+    grid-template-rows: 72px 76px minmax(260px, 1fr) 155px 38px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  #baby {
+    height: 94%;
+    bottom: 1%;
+  }
+  #scene {
+    background-size: cover;
+    background-position: center 62%;
+  }
+  #tools {
+  min-width: 0;
+    gap: 16px;
+    height: 105px;
+  }
+  .tool svg {
+    height: 72px;
+    width: 72px;
+  }
+  .tool {
+    font-size: 12px;
+  }
+  nav {
+    gap: 16px;
+  }
+  nav button {
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  nav svg {
+    width: 42px;
+    height: 42px;
+  }
+}
+@media (max-height: 690px) {
+  #app {
+    min-height: 550px;
+    grid-template-rows: 53px 63px minmax(220px, 1fr) 126px 30px;
+  }
+  nav button {
+    height: 53px;
+  }
+  #tools {
+  min-width: 0;
+    height: 80px;
+  }
+  .tool svg {
+    height: 49px;
+  }
+  #tray {
+  min-width: 0;
+    padding-top: 5px;
+  }
+  .brand {
+    font-size: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* Host navigation consumes its own row; app fills the remaining viewport. */
+body:has(> .host-nav) {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+body:has(> .host-nav) > #app {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+}
+body:has(> .host-nav) > .host-nav {
+  flex-shrink: 0;
+}
+@media (max-width: 359px) {
+  #app {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  #tray {
+  min-width: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+  #tools {
+  min-width: 0;
+    gap: 4px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 4px 2px 7px;
+  }
+  .tool {
+    min-width: 48px;
+    flex: 0 0 48px;
+    font-size: 9px;
+  }
+  nav {
+    gap: 5px;
+  }
+  footer {
+    padding: 0 3px;
+  }
+}

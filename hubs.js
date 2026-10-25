@@ -107,12 +107,13 @@ globalThis.HUA_HUBS = {
       },
       {
         id: "super-baby-care",
-        title: "Super Baby Care",
+        title: "Baby Care",
         emoji: "👶",
-        blurb: "A phone game about taking good care of a baby.",
-        tags: ["game", "phone"],
-        status: "soon",
-        url: "",
+        blurb: "Feed, splash, dress up, and tuck baby in. A little care, a lot of love.",
+        tags: ["game", "touch"],
+        status: "live",
+        action: "Play",
+        url: "activities/baby-care/",
       },
       {
         id: "animal-rescue",

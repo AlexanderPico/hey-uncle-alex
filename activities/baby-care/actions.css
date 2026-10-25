@@ -1,0 +1,61 @@
+#action-prop {
+  left: 46%;
+  top: 38%;
+  width: 20%;
+  height: 20%;
+  z-index: 6;
+  filter: drop-shadow(0 3px 2px #78524733);
+}
+#action-prop.playing {
+  animation: offer 1.3s both;
+}
+#action-prop[data-tool="cloth"],
+#action-prop[data-tool="sponge"],
+#action-prop[data-tool="towel"] {
+  top: 45%;
+  width: 25%;
+  height: 25%;
+  animation-name: wipe;
+}
+@keyframes offer {
+  0% {
+    opacity: 0;
+    transform: translate(80%, 170%) rotate(30deg) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+  }
+  50%,
+  70% {
+    transform: translate(0, 0) rotate(-12deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(65%, 70%) scale(0.5);
+  }
+}
+@keyframes wipe {
+  0% {
+    opacity: 0;
+    transform: translateX(70%);
+  }
+  20%,
+  65% {
+    opacity: 1;
+    transform: translateX(-40%) rotate(-15deg);
+  }
+  40%,
+  80% {
+    opacity: 1;
+    transform: translateX(40%) rotate(15deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(70%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #action-prop.playing {
+    animation: none;
+  }
+}
