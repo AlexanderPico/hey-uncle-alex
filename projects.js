@@ -43,6 +43,16 @@ globalThis.HUA_PROJECTS = [
     url: "bedtime/",
   },
   {
+    id: "sandbox",
+    title: "Laurel's Sandbox",
+    emoji: "🧸",
+    blurb: "A play space just for Laurel: videos and games.",
+    tags: ["videos", "games"],
+    status: "live",
+    action: "Play",
+    url: "sandbox/",
+  },
+  {
     id: "bird-nerd",
     title: "Bird Nerd",
     emoji: "🐦",

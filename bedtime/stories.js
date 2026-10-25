@@ -86,7 +86,7 @@ globalThis.HUA_STORIES = [{"date":"2026-10-24","title":"The Cushion Hotel","them
       if(s.painter&&site.indexOf(s)>=0)art.appendChild(el("p","credit","Picture by "+s.painter));}
     s.paras.forEach(function(segs){if(Array.isArray(segs))art.appendChild(paragraph(segs));});
     art.appendChild(el("p","end","The End"));
-    if(s.note)art.appendChild(el("p","note","🐦 Bird note: "+s.note));
+    if(s.note)art.appendChild(el("p","note","🔭 Did you know? "+s.note));
     w.appendChild(art);
     var done=el("button","back","← All stories");done.type="button";done.onclick=function(){location.hash="";};w.appendChild(done);
     root.appendChild(w);document.title=s.title+" · Bedtime Stories";window.scrollTo(0,0);

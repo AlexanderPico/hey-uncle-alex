@@ -89,4 +89,38 @@ globalThis.HUA_HUBS = {
       },
     ],
   },
+  sandbox: {
+    title: "Laurel's Sandbox",
+    emoji: "🧸",
+    lede: "A play space just for Laurel.",
+    items: [
+      {
+        id: "video-feed",
+        title: "Laurel's Video Feed",
+        emoji: "🎞️",
+        blurb: "Videos that play one after another. Swipe to see the next one, tap to pause.",
+        tags: ["watch"],
+        status: "soon",
+        url: "",
+      },
+      {
+        id: "super-baby-care",
+        title: "Super Baby Care",
+        emoji: "👶",
+        blurb: "A phone game about taking good care of a baby.",
+        tags: ["game", "phone"],
+        status: "soon",
+        url: "",
+      },
+      {
+        id: "animal-rescue",
+        title: "Animal Rescue",
+        emoji: "🐾",
+        blurb: "A phone game about helping animals.",
+        tags: ["game", "phone"],
+        status: "soon",
+        url: "",
+      },
+    ],
+  },
 };
