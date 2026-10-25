@@ -43,7 +43,7 @@ document.querySelector("#app").innerHTML =
     )
     .join(
       "",
-    )}</nav><section id="scene" aria-label="Baby's room"><div class="room-glow"></div><div id="caption" aria-live="polite"></div><div id="seat"></div><button id="baby" aria-label="Play with baby"><img id="sprite" src="./assets/baby-rose-neutral.webp" alt="" draggable="false"><div id="accessory"></div><div id="mess"></div><div id="foam"></div><div id="blanket"></div><div id="plush"><img src="./assets/yak.png" alt="" draggable="false"></div><div id="sleep">z<span>z</span><small>z</small></div></button><div id="rain"></div><div id="sparkles"></div><div id="night"></div></section><section id="tray" aria-label="Play things"><p id="hint">Pick something. Tap baby.</p><div id="tools"></div></section><footer><span>A little care. A lot of love.</span><button id="reset">Start a fresh day</button></footer><div id="drag-ghost" hidden></div>`;
+    )}</nav><section id="scene" aria-label="Baby's room"><div class="room-glow"></div><div id="caption" aria-live="polite"></div><div id="seat"></div><button id="baby" aria-label="Play with baby"><img id="sprite" src="./assets/baby-rose-neutral.webp" alt="" draggable="false"><div id="accessory"></div><div id="foam"></div><div id="blanket"></div><div id="plush"><img src="./assets/yak.png" alt="" draggable="false"></div><div id="sleep">z<span>z</span><small>z</small></div></button><div id="rain"></div><div id="sparkles"></div><div id="night"></div></section><section id="tray" aria-label="Play things"><p id="hint">Pick something. Tap baby.</p><div id="tools"></div></section><footer><span>A little care. A lot of love.</span><button id="reset">Start a fresh day</button></footer><div id="drag-ghost" hidden></div>`;
 
 const $ = (selector) => document.querySelector(selector);
 const baby = $("#baby");
@@ -94,7 +94,6 @@ function render() {
   $("#accessory").dataset.kind = state.accessory;
   $("#accessory").innerHTML =
     state.accessory === "clear" ? "" : icons[state.accessory];
-  $("#mess").hidden = state.mess === 0;
   $("#foam").innerHTML =
     state.room === "bath"
       ? Array.from(
