@@ -27,7 +27,7 @@ globalThis.HUA_FEED = [{"id":"cJpPDoTvTwo","title":"BBQ Bluey Book Read Aloud by
     var S=globalThis.YT.PlayerState;
     clearTimeout(seenTimer);
     if(e.data===S.PLAYING){
-      playing=true;started=true;errors=0;clearTimeout(watchdog);shield.classList.remove("off");hint.textContent="Swipe up for the next video";
+      playing=true;started=true;errors=0;clearTimeout(watchdog);shield.classList.remove("off","partial");hint.textContent="Swipe up for the next video";
       var id=VIDEOS[idx].id;seenTimer=setTimeout(function(){markSeen(id);},5000);
     }else if(e.data===S.PAUSED){playing=false;}
     else if(e.data===S.ENDED){playing=false;next();} // jump straight on: YouTube's end screen suggestions are never shown
@@ -51,7 +51,7 @@ globalThis.HUA_FEED = [{"id":"cJpPDoTvTwo","title":"BBQ Bluey Book Read Aloud by
     player.playVideo();
     // If the browser refused to start playback without a tap on the video itself, let the tap through to the player.
     clearTimeout(watchdog);
-    watchdog=setTimeout(function(){if(!playing){shield.classList.add("off");hint.textContent="Tap the ▶ on the video";}},3000);
+    watchdog=setTimeout(function(){if(!playing){shield.classList.remove("off");shield.classList.add("partial");hint.textContent="Tap the ▶ in the middle of the video";}},3000);
   }
   startBtn.addEventListener("click",function(){
     if(ready)begin();else{pendingStart=true;startBtn.querySelector(".label").textContent="Getting ready…";}
