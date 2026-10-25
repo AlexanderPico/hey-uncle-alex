@@ -226,7 +226,11 @@ document.addEventListener("click", (event) => {
   }
 });
 baby.addEventListener("click", (event) => {
-  if ((!selected || event.detail === 0 || performance.now() >= suppressUntil) && !drag) use(event);
+  if (
+    (!selected || event.detail === 0 || performance.now() >= suppressUntil) &&
+    !drag
+  )
+    use(event);
 });
 $("#sound").onclick = (event) => {
   state = act(state, { type: "mute" });

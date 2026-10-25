@@ -461,7 +461,7 @@ footer button {
     background-position: center 62%;
   }
   #tools {
-  min-width: 0;
+    min-width: 0;
     gap: 16px;
     height: 105px;
   }
@@ -495,14 +495,14 @@ footer button {
     height: 53px;
   }
   #tools {
-  min-width: 0;
+    min-width: 0;
     height: 80px;
   }
   .tool svg {
     height: 49px;
   }
   #tray {
-  min-width: 0;
+    min-width: 0;
     padding-top: 5px;
   }
   .brand {
@@ -534,18 +534,18 @@ body:has(> .host-nav) > #app {
 body:has(> .host-nav) > .host-nav {
   flex-shrink: 0;
 }
-@media (max-width: 359px) {
+@media (max-width: 450px) {
   #app {
     padding-left: 4px;
     padding-right: 4px;
   }
   #tray {
-  min-width: 0;
+    min-width: 0;
     padding-left: 1px;
     padding-right: 1px;
   }
   #tools {
-  min-width: 0;
+    min-width: 0;
     gap: 4px;
     justify-content: flex-start;
     overflow-x: auto;
@@ -553,7 +553,8 @@ body:has(> .host-nav) > .host-nav {
   }
   .tool {
     min-width: 48px;
-    flex: 0 0 48px;
+    flex: 1 0 48px;
+    touch-action: pan-x;
     font-size: 9px;
   }
   nav {
