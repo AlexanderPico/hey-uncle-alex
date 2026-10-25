@@ -15,7 +15,15 @@
     var live = p.status === "live" && p.url;
     var c = el(live ? "a" : "article", "card" + (live ? " live" : " soon"));
     if (live) { c.href = isWeb(p.url) ? p.url : base + p.url; c.rel = "noopener"; }
-    c.appendChild(el("div", "emoji", p.emoji || "✨"));
+    if (p.icon) {
+      var icon = el("img", "project-icon");
+      icon.src = base + p.icon;
+      icon.alt = "";
+      icon.width = 72; icon.height = 72;
+      c.appendChild(icon);
+    } else {
+      c.appendChild(el("div", "emoji", p.emoji || "✨"));
+    }
     c.appendChild(el("h2", null, p.title));
     c.appendChild(el("p", "blurb", p.blurb));
     var meta = el("div", "meta");

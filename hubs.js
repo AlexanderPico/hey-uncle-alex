@@ -92,6 +92,7 @@ globalThis.HUA_HUBS = {
   sandbox: {
     title: "Laurel's Sandbox",
     emoji: "🧸",
+    icon: "assets/laurel-yak.png",
     lede: "A play space just for Laurel.",
     items: [
       {

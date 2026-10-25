@@ -46,6 +46,7 @@ globalThis.HUA_PROJECTS = [
     id: "sandbox",
     title: "Laurel's Sandbox",
     emoji: "🧸",
+    icon: "assets/laurel-yak.png",
     blurb: "A play space just for Laurel: videos and games.",
     tags: ["videos", "games"],
     status: "live",
