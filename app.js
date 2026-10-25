@@ -39,6 +39,7 @@
   var list = hubId ? ((globalThis.HUA_HUBS || {})[hubId] || { items: [] }).items : (globalThis.HUA_PROJECTS || []);
   var root = document.getElementById("projects");
   // Live projects first, then coming-soon, keeping list order within each group.
+  list = list.filter(function (p) { return p.status !== "hidden"; });
   list.filter(function (p) { return p.status === "live"; })
       .concat(list.filter(function (p) { return p.status !== "live"; }))
       .forEach(function (p) {

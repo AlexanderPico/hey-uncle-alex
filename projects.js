@@ -2,6 +2,7 @@
 // To add a project: copy a block, fill it in, and set status.
 //   status: "live"  -> shows a Play button (url required)
 //           "soon"  -> shows "Coming soon" (no link)
+//           "hidden" -> not shown at all (kept here so it is easy to bring back)
 globalThis.HUA_PROJECTS = [
   {
     id: "homonym-game",
@@ -69,7 +70,7 @@ globalThis.HUA_PROJECTS = [
     emoji: "🎬",
     blurb: "Videos Uncle Alex thinks are worth watching, all in one place.",
     tags: ["watch"],
-    status: "live",
+    status: "hidden", // not shown on the landing page; the /videos/ page still exists. Set back to "live" to show it again.
     action: "Watch",
     url: "videos/",
   },
