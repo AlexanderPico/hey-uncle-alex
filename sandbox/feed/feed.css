@@ -20,3 +20,14 @@ body{position:fixed;inset:0;width:100%}
 .msg{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;background:#14224aee;font-size:1.2rem}
 .msg[hidden]{display:none}
 .title{margin:0;max-width:min(100vw - 24px,700px);color:#8f9bbd;font-size:.8rem;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Rotation needs a height-led, contained player, not the portrait layout's
+   210px allowance for controls. Keep controls overlaid and safe-area aware. */
+@media (orientation:landscape){
+  .app{height:100vh;height:100dvh;gap:0;padding:0  max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left))}
+  .screen{flex:none;width:min(100vw - max(12px,env(safe-area-inset-left)) - max(12px,env(safe-area-inset-right)),(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom))*16/9);border-radius:0}
+  .exit{left:max(10px,env(safe-area-inset-left))}
+  .controls{position:fixed;z-index:5;right:max(12px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));gap:12px;padding:6px;border-radius:48px;background:#0f1b3399}
+  .btn{width:60px;height:60px;font-size:28px}
+  .btn.main{width:72px;height:72px;font-size:34px}
+  .hint,.title{display:none}
+}
