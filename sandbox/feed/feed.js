@@ -1,4 +1,55 @@
 globalThis.HUA_FEED = [{"id":"cJpPDoTvTwo","title":"BBQ Bluey Book Read Aloud by Julia Stiles | Bluey Book Reads 💙"},{"id":"VC7ODeRhk5o","title":"Rubble & Crew: The Crew Builds a Train Station | Full Episode | PAW Patrol"},{"id":"tRMGlo9LXZI","title":"Elmo and Peppa’s Muddy Puddles (Dance Remix) Official Video @PeppaPigOfficial x  ⁨@SesameStreet ⁩"},{"id":"KnbwAF0Egfo","title":"The Ultimate Kids Yoga Routine for Focus, Confidence & Strength | Jojo Strength Yoga"},{"id":"zhDenYaFSp8","title":"Let's Play…Stickbird 🏝️ | Bluey and Bingo Playtime | Bluey"},{"id":"ncqlW6CGwqM","title":"Rubble & Crew: The Crew Fixes a Squeak | Full Episode | PAW Patrol"},{"id":"oVm0kXS_gtk","title":"George LOVES Dancing to Squashpuff Shake! 🕺🎶 Peppa Pig Tales | 20 Minutes"},{"id":"n70Ev0pPI1I","title":"🐸 kids books read aloud 🎀 This Book is MINE ! -Finn the Frog stories Ron Keres"},{"id":"0O2RM4u8sPQ","title":"Let's Play…Dirt💙😆 | Bluey and Bingo Playtime | Bluey"},{"id":"DRdT2nDwcJ8","title":"GUESS THE CHARACTER BY THE EMOJIS 🐶🦴🚜 (Part 2) | PAW Patrol | Fun Interactive Quiz for Kids"},{"id":"xzxV9-3Vvf0","title":"Peppa RESCUES Baby Duck on Bike Ride! 🐥🚲 Peppa Pig Tales | 20 Minutes"},{"id":"ldhUtthGEWM","title":"Sharing is Caring | Hey Baby Monkey, Can You Share Rainbow Popcorn? | Nursery Rhymes & Kids Songs"},{"id":"uMzriID81qA","title":"Let's Play…Relax ☺️ 🫧 | Bluey and Bingo Playtime | Bluey"},{"id":"Qsl6CVUMeiQ","title":"Rubble & Crew: The Crew Builds a Splash Park | Full Episode | PAW Patrol"},{"id":"fGZGMB6syK4","title":"George Pig's Hearing Aid Story!💙🦻| Mini Movie | Peppa Pig Tales | 24 Minutes"},{"id":"s9-JVEYglXI","title":"Can't Sleep Tonight | Good Habits for Kids | Useful Story | Cartoon | Sheriff Labrador"},{"id":"PkujpWzHrpA","title":"Science and Engineering Educational Compilation for Kids - Planets, Airplanes and More!"}];
+(function feedFullscreen(win, doc, root, button) {
+  var request = root.requestFullscreen || root.webkitRequestFullscreen;
+  var exit = doc.exitFullscreen || doc.webkitExitFullscreen;
+  var supported = !!(request && exit) && doc.fullscreenEnabled !== false && doc.webkitFullscreenEnabled !== false;
+  var pending = false, generation = 0, landscape;
+  function current() { return doc.fullscreenElement || doc.webkitFullscreenElement; }
+  function orientation() {
+    var type = win.screen && win.screen.orientation && win.screen.orientation.type;
+    if (type) return type.indexOf('landscape') === 0;
+    if (typeof win.orientation === 'number') return Math.abs(win.orientation) === 90;
+    return win.matchMedia ? win.matchMedia('(orientation: landscape)').matches : false;
+  }
+  function sync() {
+    button.hidden = !supported || (!landscape && current() !== root);
+    button.textContent = current() === root ? 'Exit full screen' : 'Full screen';
+    button.setAttribute('aria-label', button.textContent);
+    button.disabled = pending;
+  }
+  function leave() {
+    if (current() !== root) return;
+    try { Promise.resolve(exit.call(doc)).catch(function() { sync(); }); } catch (_) { sync(); }
+  }
+  function enter() {
+    if (!supported || pending || !landscape || current()) return;
+    var token = generation;
+    pending = true; sync();
+    try {
+      Promise.resolve(request.call(root)).then(function() {
+        pending = false;
+        if (token !== generation || !landscape) leave();
+        sync();
+      }, function() { pending = false; sync(); });
+    } catch (_) { pending = false; sync(); }
+  }
+  function rotate() {
+    var next = orientation();
+    if (next === landscape) return;
+    landscape = next; generation++;
+    if (landscape) enter(); else leave();
+    sync();
+  }
+  function changed() { if (!landscape && current() === root) leave(); sync(); }
+  doc.addEventListener('fullscreenchange', changed);
+  doc.addEventListener('webkitfullscreenchange', changed);
+  button.addEventListener('click', function() { if (current() === root) leave(); else enter(); });
+  // No resize listener: keyboards and collapsing browser chrome aren't rotations.
+  var screenOrientation = win.screen && win.screen.orientation;
+  if (screenOrientation && screenOrientation.addEventListener) screenOrientation.addEventListener('change', rotate);
+  win.addEventListener('orientationchange', rotate);
+  rotate(); sync();
+})(window,document,document.documentElement,document.getElementById("fullscreen"));
 (function(){
   "use strict";
   var VIDEOS=(globalThis.HUA_FEED||[]).filter(function(v){return v&&/^[\w-]{11}$/.test(v.id);});

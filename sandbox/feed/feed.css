@@ -3,7 +3,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0f1b33;color:#fff;fon
 body{position:fixed;inset:0;width:100%}
 .app{height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px}
 .exit{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:5;width:60px;height:60px;border-radius:50%;border:0;background:#ffd98a;color:#0f1b33;font:700 28px/60px system-ui;text-align:center;text-decoration:none;box-shadow:0 3px 10px #0006}
-.exit:focus-visible,.btn:focus-visible,.start:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.fullscreen:focus-visible,.exit:focus-visible,.btn:focus-visible,.start:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.fullscreen{position:fixed;z-index:6;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));min-height:48px;max-width:170px;padding:10px 16px;border:0;border-radius:24px;background:#ffd98a;color:#0f1b33;font:700 1rem system-ui;cursor:pointer}
+.fullscreen[hidden]{display:none}
 .screen{position:relative;width:min(100vw - 24px,(100dvh - 210px)*16/9);aspect-ratio:16/9;background:#000;border-radius:18px;overflow:hidden}
 .screen iframe,.screen #yt{position:absolute;inset:0;width:100%;height:100%;border:0}
 .shield{position:absolute;inset:0;z-index:2;touch-action:none;cursor:pointer}
