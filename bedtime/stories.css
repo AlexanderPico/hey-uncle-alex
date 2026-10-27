@@ -1,5 +1,5 @@
 :root{color-scheme:dark}
-.controls{display:grid;gap:12px;margin:16px 0;font:1rem system-ui}.controls label{display:grid;gap:6px}.controls input,.controls select{width:100%;min-height:48px;border:2px solid #34456f;border-radius:10px;background:#17254a;color:#f3e9d2;padding:10px;font:inherit}a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffd98a;outline-offset:2px}
+.controls{display:grid;gap:12px;margin:16px 0;font:1rem system-ui}.controls label{display:grid;gap:6px}.controls input,.controls select{width:100%;min-height:48px;border:2px solid #34456f;border-radius:10px;background:#17254a;color:#f3e9d2;padding:10px;font:inherit}.controls select{appearance:none;-webkit-appearance:none;height:48px;cursor:pointer;background:#17254a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12'%3E%3Cpath d='M2 3l6 6 6-6' fill='none' stroke='%23ffd98a' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;padding-right:40px}a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffd98a;outline-offset:2px}
 *{box-sizing:border-box}
 body{margin:0;background:#101a33;color:#f3e9d2;font:calc(var(--fs,1.25)*1rem)/1.7 Georgia,'Iowan Old Style','Times New Roman',serif}
 .wrap{max-width:40rem;margin:0 auto;padding:12px 18px 60px}
