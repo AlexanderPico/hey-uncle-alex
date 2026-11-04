@@ -6,7 +6,7 @@ globalThis.HUA_STORY_GUIDES = [{"id":"v0","label":"Before the guide"},{"id":"v1"
   var PINS_KEY="hua:bedtime:v1:pins", FS_KEY="hua:bedtime:v1:fontsize", MAXPINS=20;
   var site=(globalThis.HUA_STORIES||[]).slice();
   var THEMES=(globalThis.HUA_STORY_THEMES||[]).slice(), GUIDES=(globalThis.HUA_STORY_GUIDES||[]).slice();
-  var library=location.pathname.indexOf("/library")>=0, base=library?"../":"", query="", order="newest", filter="all", guide="all";
+  var library=location.pathname.indexOf("/library")>=0, base=library?"../":"", query="", order="newest", filter="all", guide="all", panelOpen=false;
   function themeOf(id){for(var i=0;i<THEMES.length;i++)if(THEMES[i].id===id)return THEMES[i];return null;}
   function themesOf(s){return Array.isArray(s.themes)?s.themes:[];}
   site.forEach(function(s){if(s.image)s.image=base+s.image;if(s.thumb)s.thumb=base+s.thumb;});
@@ -45,7 +45,7 @@ globalThis.HUA_STORY_GUIDES = [{"id":"v0","label":"Before the guide"},{"id":"v1"
     if(library){var home=el("a","back","← Bedtime Stories");home.href="../";w.appendChild(home);}
     var keptMap=pins(), combined=site.slice();
     Object.keys(keptMap).forEach(function(k){if(validStory(keptMap[k])&&!combined.some(function(s){return s.date===k;}))combined.push(keptMap[k]);});
-    var ul=el("ul","list"),count=el("p","sub");count.setAttribute("role","status");
+    var ul=el("ul","list"),count=el("p","sub"),sync=function(){};count.setAttribute("role","status");
     function draw(){ul.textContent="";var rows=combined.slice();
       if(library){rows=rows.filter(function(s){var labels=themesOf(s).map(function(t){var x=themeOf(t);return x?x.label:t;}).join(" ");
           return (s.title+" "+s.date+" "+(s.topic||"")+" "+(s.setting||"")+" "+labels).toLowerCase().includes(query.toLowerCase())
@@ -55,20 +55,29 @@ globalThis.HUA_STORY_GUIDES = [{"id":"v0","label":"Before the guide"},{"id":"v1"
       }else{rows.sort(function(a,b){return Number(!!keptMap[b.date])-Number(!!keptMap[a.date])||b.date.localeCompare(a.date);});rows=rows.slice(0,7);}
       rows.forEach(function(s){var li=el("li");li.appendChild(card(s,site[0]&&s.date===site[0].date,!!keptMap[s.date]));ul.appendChild(li);});
       if(!rows.length)ul.appendChild(el("li","empty",library?"No stories match. Try another search or filter.":"No stories yet. Check back tonight."));
-      count.textContent=rows.length+" "+(rows.length===1?"story":"stories");
+      count.textContent=rows.length+" "+(rows.length===1?"story":"stories");sync();
     }
     if(library){var controls=el("div","controls");
       var label=el("label","","Search stories");var input=el("input");input.type="search";input.value=query;input.placeholder="Title, date, topic or setting";input.oninput=function(){query=input.value;draw();};label.appendChild(input);controls.appendChild(label);
-      function select(name,options,value,change){var l=el("label","",name),sel=el("select");sel.setAttribute("aria-label",name);options.forEach(function(o){var opt=el("option","",o[1]);opt.value=o[0];sel.appendChild(opt);});sel.value=value;sel.onchange=function(){change(sel.value);draw();};l.appendChild(sel);controls.appendChild(l);}
-      select("Sort",[["newest","Newest first"],["oldest","Oldest first"],["title","Title A–Z"]],order,function(v){order=v;});
+      // Sort, theme and guide menus live in a collapsed panel behind one Filter button; the badge shows how many filters are on.
+      var tools=el("div","tools"),toggle=el("button","filter-toggle"),panel=el("div","filter-panel");panel.id="library-filters";panel.setAttribute("role","group");panel.setAttribute("aria-label","Filters");
+      toggle.type="button";toggle.setAttribute("aria-controls",panel.id);toggle.innerHTML='<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filter</span><span class="fcount" hidden></span><span class="sr" hidden> active</span>';
+      function setOpen(v){panelOpen=v;panel.hidden=!v;toggle.setAttribute("aria-expanded",v?"true":"false");}
+      toggle.onclick=function(){setOpen(!panelOpen);};setOpen(panelOpen);tools.appendChild(toggle);tools.appendChild(count);controls.appendChild(tools);controls.appendChild(panel);
+      function select(name,options,value,change){var l=el("label","",name),sel=el("select");sel.setAttribute("aria-label",name);options.forEach(function(o){var opt=el("option","",o[1]);opt.value=o[0];sel.appendChild(opt);});sel.value=value;sel.onchange=function(){change(sel.value);draw();};l.appendChild(sel);panel.appendChild(l);return sel;}
+      var sortSel=select("Sort",[["newest","Newest first"],["oldest","Oldest first"],["title","Title A–Z"]],order,function(v){order=v;});
       function n(test){return combined.filter(test).length;}
       var themeOpts=THEMES.map(function(t){return [t.id,(t.icon?t.icon+" ":"")+t.label+" ("+n(function(s){return themesOf(s).indexOf(t.id)>=0;})+")"];});
-      select("Theme",[["all","All themes ("+combined.length+")"],["pinned","📌 Pinned on this device ("+n(function(s){return !!keptMap[s.date];})+")"]].concat(themeOpts),filter,function(v){filter=v;});
+      var themeSel=select("Theme",[["all","All themes ("+combined.length+")"],["pinned","📌 Pinned on this device ("+n(function(s){return !!keptMap[s.date];})+")"]].concat(themeOpts),filter,function(v){filter=v;});
       var guideOpts=GUIDES.map(function(g){return [g.id,g.label+" ("+n(function(s){return s.guide===g.id;})+")"];}).filter(function(o,i){return n(function(s){return s.guide===GUIDES[i].id;})>0;});
       var unknown=n(function(s){return !s.guide;});if(unknown)guideOpts.push(["unknown","Not tagged ("+unknown+")"]);
-      select("Guide version",[["all","All guide versions"]].concat(guideOpts),guide,function(v){guide=v;});w.appendChild(controls);
+      var guideSel=select("Guide version",[["all","All guide versions"]].concat(guideOpts),guide,function(v){guide=v;});
+      var clear=el("button","clear","Clear");clear.type="button";panel.appendChild(clear);
+      clear.onclick=function(){order="newest";filter="all";guide="all";sortSel.value=order;themeSel.value=filter;guideSel.value=guide;draw();toggle.focus();};
+      sync=function(){var on=(filter!=="all"?1:0)+(guide!=="all"?1:0),b=toggle.querySelector(".fcount");b.textContent=on?String(on):"";b.hidden=toggle.querySelector(".sr").hidden=!on;clear.disabled=!on&&order==="newest";};
+      w.appendChild(controls);
     }
-    w.appendChild(count);w.appendChild(ul);draw();
+    if(!count.parentNode)w.appendChild(count);w.appendChild(ul);draw();
     w.appendChild(el("p","fine","Kept stories are saved on this device only. All your kept stories remain in the Library, even when more than seven are kept."));
     if(!library){var note=el("p","fine"),link=el("a","back","Visit the library for old stories");link.href="library/";note.appendChild(link);w.appendChild(note);}
     root.appendChild(w);document.title=(library?"Library":"Bedtime Stories")+" · Hey Uncle Alex";
