@@ -1,0 +1,1 @@
+globalThis.HUA_POSTCARD = {"slug":"2026-11-17-qwen3-8-27b","title":"Postcard from Osaki, northeast Japan","blurb":"The water went into the fields, not the homes.","year":2035,"thumb":"postcard/art/2026-11-17-qwen3-8-27b.thumb.jpg"};

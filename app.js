@@ -12,10 +12,21 @@
   var isWeb = function (u) { return /^https?:\/\//.test(u); };
 
   function card(p) {
+    // The Postcards card changes daily: build-postcard.js writes postcard/today.js (title, caption, picture).
+    var pc = globalThis.HUA_POSTCARD;
+    if (p.id === "postcard" && pc && !hubId) {
+      p = Object.assign({}, p, { title: pc.title, blurb: pc.blurb, tags: ["postcards from the future", String(pc.year)], postcardThumb: pc.thumb });
+    }
     var live = p.status === "live" && p.url;
     var c = el(live ? "a" : "article", "card" + (live ? " live" : " soon"));
     if (live) { c.href = isWeb(p.url) ? p.url : base + p.url; c.rel = "noopener"; }
-    if (p.icon) {
+    if (p.postcardThumb) {
+      var pic = el("img", "postcard-thumb");
+      pic.src = base + p.postcardThumb;
+      pic.alt = "";
+      pic.width = 360; pic.height = 240;
+      c.appendChild(pic);
+    } else if (p.icon) {
       var icon = el("img", "project-icon");
       icon.src = base + p.icon;
       icon.alt = "";

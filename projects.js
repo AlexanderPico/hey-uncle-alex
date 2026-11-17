@@ -44,6 +44,16 @@ globalThis.HUA_PROJECTS = [
     url: "bedtime/",
   },
   {
+    id: "postcard",
+    title: "Postcards from the Future",
+    emoji: "💌",
+    blurb: "A new postcard every day, mailed from a hopeful future.",
+    tags: ["future", "daily"],
+    status: "live",
+    action: "Read",
+    url: "postcard/",
+  },
+  {
     id: "sandbox",
     title: "Laurel's Sandbox",
     emoji: "🧸",
