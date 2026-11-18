@@ -15,7 +15,7 @@
     // The Postcards card changes daily: build-postcard.js writes postcard/today.js (title, caption, picture).
     var pc = globalThis.HUA_POSTCARD;
     if (p.id === "postcard" && pc && !hubId) {
-      p = Object.assign({}, p, { title: pc.title, blurb: pc.blurb, tags: ["postcards from the future", String(pc.year)], postcardThumb: pc.thumb });
+      p = Object.assign({}, p, { title: pc.title, blurb: pc.blurb, tags: ["future", "daily"], postcardThumb: pc.thumb });
     }
     var live = p.status === "live" && p.url;
     var c = el(live ? "a" : "article", "card" + (live ? " live" : " soon"));
