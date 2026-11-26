@@ -1,1 +1,1 @@
-globalThis.HUA_POSTCARD = {"slug":"2026-11-25-claude-opus-5-5","title":"Postcard from 2079","blurb":"Appalachian ridges, eastern US","year":2079,"thumb":"postcard/art/2026-11-25-claude-opus-5-5.thumb.jpg"};
+globalThis.HUA_POSTCARD = {"slug":"2026-11-26-gpt-6-1-sol","title":"Postcard from 2037","blurb":"A neighborhood kitchen in Portland","year":2037,"thumb":"postcard/art/2026-11-26-gpt-6-1-sol.thumb.jpg"};
